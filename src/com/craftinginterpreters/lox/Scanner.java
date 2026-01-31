@@ -91,6 +91,7 @@ class Scanner {
             while (isDigit(peek()));
         }
 
+        // convert the number value to a Java Double type and value
         addToken(NUMBER, Double.parseDouble(source.substring(start, current)));
     }
 
