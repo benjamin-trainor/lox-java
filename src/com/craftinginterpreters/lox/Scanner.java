@@ -70,7 +70,11 @@ class Scanner {
             case '"': string(); break;
 
             default:
-                Lox.error(line, "Unexpected character");
+                if (isDigit(c)) {
+                    number();
+                } else {
+                    Lox.error(line, "Unexpected character");
+                }
                 break;
         }
     }
@@ -105,6 +109,15 @@ class Scanner {
         // '\0' means end of file ASCII character
         if (isAtEnd()) return '\0';
         return source.charAt(current);
+    }
+
+    // a char type under the hood is a 16-bit unsigned integer as Unicode
+    // '0' is Unicode 48 and '9' is Unicode 57
+    private boolean isDigit(char c) {
+        // so this below comparison is actually
+        // is the Unicode of char c
+        // larger than or equal to the Unicode representing '0' etc
+        return c >= '0' && c <= '9';
     }
 
     private boolean isAtEnd() {
