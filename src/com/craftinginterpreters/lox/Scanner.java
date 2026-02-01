@@ -7,6 +7,9 @@ import java.util.Map;
 
 import static com.craftinginterpreters.lox.TokenType.*;
 
+// Challenges:
+// - add support for C-style /* ... */ block comments
+
 class Scanner {
     private final String source;
     private final List<Token> tokens = new ArrayList<>();
