@@ -16,6 +16,10 @@ class Scanner {
 
     private static final Map<String, TokenType> keywords;
 
+    private int start = 0;
+    private int current = 0;
+    private int line = 1;
+
     static {
         keywords = new HashMap<>();
         keywords.put("and", AND);
@@ -35,10 +39,6 @@ class Scanner {
         keywords.put("var", VAR);
         keywords.put("while", WHILE);
     }
-
-    private int start = 0;
-    private int current = 0;
-    private int line = 1;
 
     Scanner(String source) {
         this.source = source;
@@ -197,6 +197,12 @@ class Scanner {
 
     private char advance() {
         return source.charAt(current++);
+        // could also be written as:
+        // char c = source.charAt(current);
+        // current = current + 1;
+        // return c;
+        // the postfix 'current++' means that once the statement is evaluated
+        // the value of the variable current is incremented by 1
     }
 
     private void addToken(TokenType type) {
